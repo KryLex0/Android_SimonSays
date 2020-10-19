@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">SimonSays</string>
+    <string name="couleur">Couleur:</string>
+    <string name="score">Score:</string>
+    <string name="score_val">0</string>
+    <string name="start">Start</string>
+</resources>
