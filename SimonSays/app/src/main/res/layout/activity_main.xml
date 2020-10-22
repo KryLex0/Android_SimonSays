@@ -17,13 +17,16 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/couleur"
-            android:gravity="center"/>
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text=""
+            android:id="@+id/tv_color_name"
             android:gravity="center"
-            android:id="@+id/tv_color"/>
+            android:visibility="invisible"
+            android:layout_marginEnd="20dp"/>
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/btn_color"
+            android:visibility="invisible"
+            android:clickable="false"/>
     </LinearLayout>
 
     <LinearLayout
@@ -37,13 +40,15 @@
             android:layout_height="wrap_content"
             android:text="@string/score"
             android:gravity="center"
-            android:id="@+id/tv_score"/>
+            android:id="@+id/tv_score"
+            android:visibility="invisible"/>
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/score_val"
             android:gravity="center"
-            android:id="@+id/tv_val_score"/>
+            android:id="@+id/tv_val_score"
+            android:visibility="invisible"/>
     </LinearLayout>
 
     <Button
