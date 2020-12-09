@@ -7,7 +7,8 @@
     tools:context=".MainActivity"
     android:padding="10dp"
     android:layout_gravity="center_horizontal"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:id="@+id/layout_primary">
     <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -19,13 +20,11 @@
             android:text="@string/couleur"
             android:id="@+id/tv_color_name"
             android:gravity="center"
-            android:visibility="invisible"
             android:layout_marginEnd="20dp"/>
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/btn_color"
-            android:visibility="invisible"
             android:clickable="false"/>
     </LinearLayout>
 
@@ -40,23 +39,14 @@
             android:layout_height="wrap_content"
             android:text="@string/score"
             android:gravity="center"
-            android:id="@+id/tv_score"
-            android:visibility="invisible"/>
+            android:id="@+id/tv_score" />
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/score_val"
             android:gravity="center"
-            android:id="@+id/tv_val_score"
-            android:visibility="invisible"/>
+            android:id="@+id/tv_val_score" />
     </LinearLayout>
-
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/btn_start"
-        android:text="@string/start"
-        android:layout_gravity="center"/>
 
 
 <!--//////////////////////////////////////////////////////////////////////////-->
@@ -65,29 +55,22 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
+        android:id="@+id/btn_table"
         >
         <TableRow
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:layout_gravity="center"
-            android:layout_weight="1">
+            android:layout_weight="1"
+            android:id="@+id/btn_haut">
             <Button
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:id="@+id/btn_1"
                 android:backgroundTint="@color/red"
-                android:visibility="invisible"
                 android:layout_marginEnd="5dp"/>
-            <Button
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:id="@+id/btn_2"
-                android:backgroundTint="@color/blue"
-                android:visibility="invisible"
-                android:layout_marginStart="5dp"/>
         </TableRow>
 
         <TableRow
@@ -95,24 +78,19 @@
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:layout_gravity="center"
-            android:layout_weight="1">
+            android:layout_weight="1"
+            android:id="@+id/btn_bas">
+
             <Button
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:id="@+id/btn_3"
-                android:backgroundTint="@color/green"
-                android:visibility="invisible"
-                android:layout_marginEnd="5dp"/>
-            <Button
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:id="@+id/btn_4"
-                android:backgroundTint="@color/yellow"
-                android:visibility="invisible"
+                android:id="@+id/btn_2"
+                android:backgroundTint="@color/blue"
                 android:layout_marginStart="5dp"/>
+
         </TableRow>
+
     </TableLayout>
 
 
