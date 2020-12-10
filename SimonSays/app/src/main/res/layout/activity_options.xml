@@ -5,93 +5,84 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MainActivity"
-    android:padding="10dp"
     android:layout_gravity="center_horizontal"
     android:orientation="vertical"
-    android:id="@+id/layout_primary">
-    <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_gravity="center_horizontal">
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/couleur"
-            android:id="@+id/tv_color_name"
-            android:gravity="center"
-            android:layout_marginEnd="20dp"/>
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/btn_color"
-            android:clickable="false"/>
-    </LinearLayout>
+    android:id="@+id/layout_primary"
+    android:padding="20dp">
 
     <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_marginBottom="10dp"
-            android:layout_gravity="center_horizontal">
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/score"
-            android:gravity="center"
-            android:id="@+id/tv_score" />
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/score_val"
-            android:gravity="center"
-            android:id="@+id/tv_val_score" />
-    </LinearLayout>
-
-
-<!--//////////////////////////////////////////////////////////////////////////-->
-
-    <TableLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:id="@+id/btn_table"
-        >
-        <TableRow
-            android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:layout_marginBottom="20dp">
+        <TextView
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:layout_gravity="center"
-            android:layout_weight="1"
-            android:id="@+id/btn_haut">
-            <Button
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:id="@+id/btn_1"
-                android:backgroundTint="@color/red"
-                android:layout_marginEnd="5dp"/>
-        </TableRow>
-
-        <TableRow
-            android:layout_width="match_parent"
+            android:text="Niveau de difficulté: "
+            android:gravity="center"
+            android:layout_weight="1"/>
+        <Spinner
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:layout_gravity="center"
+            android:layout_width="wrap_content"
+            android:entries="@array/difficulty"
+            android:prompt="@string/init_diff"
+            android:id="@+id/spinner_difficulty"
+            android:layout_weight="1" />
+    </LinearLayout>
+
+    <!--////////////////////////////////-->
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:layout_marginBottom="20dp">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Nombre de bouton en plus par tour: "
+            android:layout_weight="1"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="1"
+            android:id="@+id/nb_btn_option"
             android:layout_weight="1"
-            android:id="@+id/btn_bas">
+            android:gravity="center"/>
+    </LinearLayout>
 
-            <Button
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:id="@+id/btn_2"
-                android:backgroundTint="@color/blue"
-                android:layout_marginStart="5dp"/>
+    <!--////////////////////////////////-->
 
-        </TableRow>
 
-    </TableLayout>
+
+    <SeekBar
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/sk_nb_btn_option"
+        android:max="3"
+        android:min="1"
+        android:layout_marginBottom="20dp"/>
+
+    <!--////////////////////////////////-->
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:layout_marginBottom="20dp"
+        tools:ignore="UseSwitchCompatOrMaterialXml">
+        <Switch
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Activer l'animation des boutons"
+            android:id="@+id/switch_anim"
+            android:layout_weight="1"/>
+
+    </LinearLayout>
+
 
 
 </LinearLayout>

@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     tools:context=".MainActivity"
     android:padding="10dp"
     android:layout_gravity="center_horizontal"
@@ -13,19 +13,44 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:layout_gravity="center_horizontal">
+            android:layout_gravity="center_horizontal"
+            android:id="@+id/btnColorLayout">
+
+
         <TextView
+            android:id="@+id/tv_color_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/couleur"
-            android:id="@+id/tv_color_name"
+            android:layout_marginEnd="20dp"
             android:gravity="center"
-            android:layout_marginEnd="20dp"/>
+            android:text="@string/couleur" />
+
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/btn_color"
-            android:clickable="false"/>
+            android:id="@+id/btn_color1"
+            android:clickable="false"
+            android:layout_weight="1"
+            android:layout_marginRight="10dp"
+            android:visibility="gone"/>
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/btn_color2"
+            android:clickable="false"
+            android:layout_weight="1"
+            android:layout_marginRight="10dp"
+            android:visibility="gone"/>
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/btn_color3"
+            android:clickable="false"
+            android:layout_weight="1"
+            android:layout_marginRight="10dp"
+            android:visibility="gone"/>
+
+
     </LinearLayout>
 
     <LinearLayout
@@ -48,50 +73,6 @@
             android:id="@+id/tv_val_score" />
     </LinearLayout>
 
-
-<!--//////////////////////////////////////////////////////////////////////////-->
-
-    <TableLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:id="@+id/btn_table"
-        >
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:layout_gravity="center"
-            android:layout_weight="1"
-            android:id="@+id/btn_haut">
-            <Button
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:id="@+id/btn_1"
-                android:backgroundTint="@color/red"
-                android:layout_marginEnd="5dp"/>
-        </TableRow>
-
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:layout_gravity="center"
-            android:layout_weight="1"
-            android:id="@+id/btn_bas">
-
-            <Button
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:id="@+id/btn_2"
-                android:backgroundTint="@color/blue"
-                android:layout_marginStart="5dp"/>
-
-        </TableRow>
-
-    </TableLayout>
 
 
 </LinearLayout>

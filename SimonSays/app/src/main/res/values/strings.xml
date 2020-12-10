@@ -4,4 +4,15 @@
     <string name="score">Score : </string>
     <string name="score_val">0</string>
     <string name="start">Start</string>
+    <string name="highscore">Tableau des Scores</string>
+
+    <string name="init_diff">Normal</string>
+
+    <string-array name="difficulty">
+        <item>Facile</item>
+        <item>Normal</item>
+        <item>Difficile</item>
+    </string-array>
+
+
 </resources>

@@ -2,80 +2,107 @@ package com.example.simonsays
 
 
 import android.app.Application
-import android.content.Intent
+import android.graphics.drawable.Drawable
+import android.graphics.drawable.Icon
 import android.os.AsyncTask
 import android.os.Bundle
 import android.util.Log
-import android.widget.Button
-import android.widget.TableLayout
-import android.widget.TableRow
-import android.widget.TextView
+import android.view.View
+import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.setPadding
+import kotlinx.android.synthetic.main.activity_score_board.*
+import kotlinx.android.synthetic.main.popup_name.view.*
 
 
-class ActivityStart : AppCompatActivity() {
-
-    private lateinit var btn_start: Button
-    private lateinit var table_score: TableLayout
+class ScoreBoard : AppCompatActivity() {
+    //private lateinit var btn_remove_all: Button
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity1)
+        setContentView(R.layout.activity_score_board)
+        displayPlayerHighscore()
 
-        btn_start = findViewById(R.id.btn_start)
-
-        btn_start.setOnClickListener{
-            val intent = Intent(this, MainActivity::class.java)
-            startActivity(intent)
+        //btn_remove_all = findViewById(R.id.btn_remove_all)
+        btn_remove_all.setOnClickListener {
+            removeAll()
         }
 
-        table_score = findViewById(R.id.table_score)
-        DisplayDataPlayers(application, table_score).execute()
     }
 
-    fun displayData(application: Application, table_score: TableLayout){
-        val x = AppDatabase.get(application).playerDao().getAll().forEach{
-            val tr1 = TableRow(application)
-            tr1.layoutParams = TableLayout.LayoutParams(TableLayout.LayoutParams.WRAP_CONTENT, TableLayout.LayoutParams.WRAP_CONTENT)
-            val textview = TextView(application)
-            textview.text = "${it.name}"
-            tr1.addView(textview)
-            table_score.addView(tr1, TableLayout.LayoutParams(TableLayout.LayoutParams.WRAP_CONTENT, TableLayout.LayoutParams.WRAP_CONTENT))
-        }
+    private fun removeAll(){
+        AppDatabase.get(application).playerDao().deleteAll()
+        finish()
+        startActivity(intent)
     }
 
-    class DisplayDataPlayers(val application: Application, val table_score:TableLayout) : AsyncTask<Void,Void,Void>(){
-        override fun onPreExecute() {
-            super.onPreExecute()
+    private fun displayPlayerHighscore(){
+        var rang = 1
+        //val parent_linear = findViewById<LinearLayout>(R.id.parent_linear)
+        AppDatabase.get(application).playerDao().getTenLast().forEach { it ->
 
-        }
+            val parent = LinearLayout(this)
 
-        override fun doInBackground(vararg params: Void?): Void? {
-            val x = AppDatabase.get(application).playerDao().getAll().forEach{
-                val tr1 = TableRow(application)
-                tr1.layoutParams = TableLayout.LayoutParams(TableLayout.LayoutParams.WRAP_CONTENT, TableLayout.LayoutParams.WRAP_CONTENT)
-                val textview = TextView(application)
-                textview.text = "${it.name}"
-                tr1.addView(textview)
-                table_score.addView(tr1, TableLayout.LayoutParams(TableLayout.LayoutParams.WRAP_CONTENT, TableLayout.LayoutParams.WRAP_CONTENT))
+            parent.layoutParams = LinearLayout.LayoutParams(
+                LinearLayout.LayoutParams.MATCH_PARENT,
+                LinearLayout.LayoutParams.WRAP_CONTENT
+            )
+            parent.orientation = LinearLayout.HORIZONTAL
+
+
+            val tv1 = TextView(this)
+            tv1.text = rang.toString()
+            tv1.layoutParams =
+                LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.WRAP_CONTENT, 1.0f)
+            tv1.textAlignment = View.TEXT_ALIGNMENT_CENTER
+            tv1.setBackgroundResource(R.drawable.row_borders)
+            tv1.setPadding(15)
+            parent.addView(tv1)
+
+            val tv2 = TextView(this)
+            tv2.text = it.name
+            tv2.layoutParams =
+                LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.WRAP_CONTENT, 1.0f)
+            tv2.textAlignment = View.TEXT_ALIGNMENT_CENTER
+            tv2.setBackgroundResource(R.drawable.row_borders)
+            tv2.setPadding(15)
+            parent.addView(tv2)
+
+            val tv3 = TextView(this)
+            tv3.text = it.score.toString()
+            tv3.layoutParams =
+                LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.WRAP_CONTENT, 1.0f)
+            tv3.textAlignment = View.TEXT_ALIGNMENT_CENTER
+            tv3.setBackgroundResource(R.drawable.row_borders)
+            tv3.setPadding(15)
+            parent.addView(tv3)
+
+            val tv4 = TextView(this)
+            tv4.text = "X"
+            tv4.layoutParams =
+                LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.WRAP_CONTENT, 1.0f)
+            tv4.textAlignment = View.TEXT_ALIGNMENT_CENTER
+            tv4.setBackgroundResource(R.drawable.row_borders)
+            tv4.setPadding(15)
+
+            val playerId = it.id
+            tv4.setOnClickListener {
+                AppDatabase.get(application).playerDao().deletePlayerFromId(playerId)
+                Toast.makeText(this, "Le score selectionné a bien été supprimé", Toast.LENGTH_SHORT).show()
+                finish()
+                startActivity(intent)
             }
-            return null
+
+            parent.addView(tv4)
+
+
+            parent_linear.addView(parent)
+            rang += 1
         }
     }
 
-  /*
-    class InsertDataPlayer(val application: Application) : AsyncTask<Void,Void,Void>(){
-        override fun doInBackground(vararg params: Void?): Void? {
-            AppDatabase.get(application).playerDao().insertPlayer(Player("Adam1", 10))
-            AppDatabase.get(application).playerDao().insertPlayer(Player("Adam2", 0))
-            AppDatabase.get(application).playerDao().insertPlayer(Player("Adam3", 100))
-            AppDatabase.get(application).playerDao().insertPlayer(Player("Adam4", 1))
-            val x = AppDatabase.get(application).playerDao().getAll().forEach{
-                Log.d("test123", "id: ${it.id} et name: ${it.name} et score: ${it.score}")
-            }
+}
 
-            return null
-        }
-    }
-*/
+private operator fun Drawable.invoke(s: String) {
+
 }
