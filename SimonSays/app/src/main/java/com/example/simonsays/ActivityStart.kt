@@ -37,6 +37,7 @@ class ActivityStart : AppCompatActivity() {
             intent.putExtra("animSwitch", this.isSwitchChecked)
             startActivity(intent)
         }
+
         btn_high_score.setOnClickListener{
             val intent = Intent(this, ScoreBoard::class.java)
             startActivity(intent)
