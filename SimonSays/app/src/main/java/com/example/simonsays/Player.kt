@@ -10,7 +10,8 @@ import androidx.room.PrimaryKey
 data class Player(
     @PrimaryKey(autoGenerate = true) var id: Long = 0,
     val name:String,
-    val score: Long
+    val score: Long,
+    val difficulty: String
 ){
-    constructor(name: String, score: Long) : this(0, name, score)
+    constructor(name: String, score: Long, difficulty: String) : this(0, name, score, difficulty)
 }

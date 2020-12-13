@@ -88,7 +88,6 @@ class ActivityOptions : AppCompatActivity() {
         }
         spinner_difficulty.setSelection(index)
         return index
-
     }
 
 

@@ -237,7 +237,7 @@ class MainActivity : AppCompatActivity() {
 
         Log.d("test123", nomJoueur)
 
-        AppDatabase.get(application).playerDao().insertPlayer(Player(nomJoueur, scoreP))
+        AppDatabase.get(application).playerDao().insertPlayer(Player(nomJoueur, scoreP, this.difficulty))
         Log.d("test123", "$nomJoueur a bien ete ajoute avec un score de $scoreP")
 
         val intent = Intent(this, ActivityStart::class.java)

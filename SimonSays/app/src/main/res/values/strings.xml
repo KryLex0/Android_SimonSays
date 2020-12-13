@@ -7,8 +7,15 @@
     <string name="highscore">Tableau des Scores</string>
 
     <string name="init_diff">Normal</string>
-
     <string-array name="difficulty">
+        <item>Facile</item>
+        <item>Normal</item>
+        <item>Difficile</item>
+    </string-array>
+
+    <string name="diff_score">All</string>
+    <string-array name="difficulty_highscore">
+        <item>All</item>
         <item>Facile</item>
         <item>Normal</item>
         <item>Difficile</item>

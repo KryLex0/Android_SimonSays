@@ -18,6 +18,19 @@ interface PlayerDao {
     @Query("SELECT * FROM Players ORDER BY score DESC, name ASC LIMIT 10")
     fun getTenLast(): List<Player>
 
+
+
+    @Query("SELECT * FROM Players WHERE difficulty LIKE 'Facile' ORDER BY score DESC, name ASC LIMIT 10")
+    fun getTenLastFacile(): List<Player>
+
+    @Query("SELECT * FROM Players WHERE difficulty LIKE 'Normal' ORDER BY score DESC, name ASC LIMIT 10")
+    fun getTenLastNormal(): List<Player>
+
+    @Query("SELECT * FROM Players WHERE difficulty LIKE 'Difficile' ORDER BY score DESC, name ASC LIMIT 10")
+    fun getTenLastDifficile(): List<Player>
+
+
+
     @Query("DELETE FROM Players WHERE id LIKE :playerId")
     fun deletePlayerFromId(playerId: Long)
 

@@ -1,35 +1,41 @@
 package com.example.simonsays
 
 
-import android.app.Application
-import android.graphics.drawable.Drawable
-import android.graphics.drawable.Icon
-import android.os.AsyncTask
+import android.database.Cursor
 import android.os.Bundle
-import android.util.Log
 import android.view.View
-import android.widget.*
+import android.widget.AdapterView
+import android.widget.LinearLayout
+import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.setPadding
 import kotlinx.android.synthetic.main.activity_score_board.*
-import kotlinx.android.synthetic.main.data_party.*
-import kotlinx.android.synthetic.main.popup_name.view.*
 
 
 class ScoreBoard : AppCompatActivity() {
     //private lateinit var btn_remove_all: Button
+    private var difficultyHighscore: String = "All"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_score_board)
-        displayPlayerHighscore()
 
         btn_remove_all.setOnClickListener {
             removeAll()
         }
 
+        spinner_difficulty_highscore.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(parent: AdapterView<*>, view: View, pos: Int, id: Long) {
+                difficultyHighscore = spinner_difficulty_highscore.selectedItem.toString()
+                dataScorePlayer(difficultyHighscore)
+            }
+
+            override fun onNothingSelected(parent: AdapterView<*>?) {}
+        }
     }
+
 
     private fun removeAll(){    //remove tout le contenue de la bdd
         AppDatabase.get(application).playerDao().deleteAll()
@@ -37,11 +43,46 @@ class ScoreBoard : AppCompatActivity() {
         startActivity(intent)
     }
 
-    private fun displayPlayerHighscore(){   //affiche les 10 derniers meilleurs score (ajout dynamiquement)
-        var rang = 1
-        AppDatabase.get(application).playerDao().getTenLast().forEach { it ->
 
-            //creation d'un linear layout qui contiendra les infos
+    //fonction qui recupere les 10 meilleurs score en fonction du niveau de difficulté (Facile, Normal, Difficile) OU tous sans distinction
+    private fun dataScorePlayer(difficulty: String) {
+        tabContainer.removeAllViews()   //clear le contenu du scoreBoard
+
+        var listPlayerData: List<Player> = AppDatabase.get(application).playerDao().getTenLast()
+        if(difficulty == "All"){
+            listPlayerData = AppDatabase.get(application).playerDao().getTenLast()
+        }else if(difficulty == "Facile"){
+            listPlayerData = AppDatabase.get(application).playerDao().getTenLastFacile()
+        }else if(difficulty == "Normal"){
+            listPlayerData = AppDatabase.get(application).playerDao().getTenLastNormal()
+        }else if(difficulty == "Difficile"){
+            listPlayerData = AppDatabase.get(application).playerDao().getTenLastDifficile()
+        }
+
+
+        if(listPlayerData.isEmpty()){   //Affiche un message si aucune donnée présente dans la bdd suivant le niveau de difficulté
+            var emptyV = TextView(this)
+            emptyV.textSize = 20F
+            emptyV.text = "Aucune donnée disponible"
+            emptyV.layoutParams = LinearLayout.LayoutParams(
+                    LinearLayout.LayoutParams.MATCH_PARENT,
+                    LinearLayout.LayoutParams.WRAP_CONTENT
+            )
+            emptyV.textAlignment = View.TEXT_ALIGNMENT_CENTER
+            tabContainer.addView(emptyV)
+        }
+
+        displayPlayerHighscore(listPlayerData)
+    }
+
+
+
+    private fun displayPlayerHighscore(listPlayerData: List<Player>) {   //affiche les 10 derniers meilleurs score (ajout dynamiquement)
+        var rang = 1
+
+
+        listPlayerData.forEach { it ->
+                //creation d'un linear layout qui contiendra les infos
             val parent = LinearLayout(this)
             parent.layoutParams = LinearLayout.LayoutParams(
                 LinearLayout.LayoutParams.MATCH_PARENT,
@@ -90,6 +131,7 @@ class ScoreBoard : AppCompatActivity() {
 
             val playerId = it.id
             tv4.setOnClickListener {
+                //popup de confirmation de suppression de la ligne
                 val builder = AlertDialog.Builder(this)
 
                 builder.setTitle("Supprimer?")
@@ -105,13 +147,15 @@ class ScoreBoard : AppCompatActivity() {
                 builder.setNegativeButton("Non") { _, _ -> }
                 builder.show()
             }
-
             parent.addView(tv4)
 
+            tabContainer.addView(parent)    //ajout dans un container (déja présent dans le xml activity_score_board) chaque ligne généré dynamiquement
 
-            parent_linear.addView(parent)
             rang += 1
         }
+
     }
+
+
 
 }
