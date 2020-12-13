@@ -31,7 +31,6 @@ class ScoreBoard : AppCompatActivity() {
                 difficultyHighscore = spinner_difficulty_highscore.selectedItem.toString()
                 dataScorePlayer(difficultyHighscore)
             }
-
             override fun onNothingSelected(parent: AdapterView<*>?) {}
         }
     }
@@ -48,9 +47,9 @@ class ScoreBoard : AppCompatActivity() {
     private fun dataScorePlayer(difficulty: String) {
         tabContainer.removeAllViews()   //clear le contenu du scoreBoard
 
-        var listPlayerData: List<Player> = AppDatabase.get(application).playerDao().getTenLast()
+        var listPlayerData: List<Player> = AppDatabase.get(application).playerDao().getTenLastAll()
         if(difficulty == "All"){
-            listPlayerData = AppDatabase.get(application).playerDao().getTenLast()
+            listPlayerData = AppDatabase.get(application).playerDao().getTenLastAll()
         }else if(difficulty == "Facile"){
             listPlayerData = AppDatabase.get(application).playerDao().getTenLastFacile()
         }else if(difficulty == "Normal"){

@@ -96,7 +96,6 @@
         android:orientation="vertical"
         android:id="@+id/tabContainer"
         android:layout_marginBottom="20dp">
-
     </LinearLayout>
 
 

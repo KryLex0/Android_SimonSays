@@ -15,10 +15,10 @@ interface PlayerDao {
     @Query("SELECT * FROM Players")
     fun getAll(): List<Player>
 
+
+
     @Query("SELECT * FROM Players ORDER BY score DESC, name ASC LIMIT 10")
-    fun getTenLast(): List<Player>
-
-
+    fun getTenLastAll(): List<Player>
 
     @Query("SELECT * FROM Players WHERE difficulty LIKE 'Facile' ORDER BY score DESC, name ASC LIMIT 10")
     fun getTenLastFacile(): List<Player>
