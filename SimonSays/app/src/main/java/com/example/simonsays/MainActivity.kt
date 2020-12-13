@@ -55,9 +55,9 @@ class MainActivity : AppCompatActivity() {
         this.animBtn = this.intent.getBooleanExtra("animSwitch", this.animBtn)
 
 
-        btnDataParty()
-        setBtnDifficulte()
-        nextLevel()
+        btnDataParty()  //affiche 1/2/3 boutons suivant le nombre de boutons par tours (options)
+        setBtnDifficulte()  //affiche 2/4/6 boutons suivant la difficulté choisit (options)
+        nextLevel() //lancement de la 1ere manche
 
     }
 
@@ -225,29 +225,6 @@ class MainActivity : AppCompatActivity() {
         builder.show()
     }
 
-/*
-    private fun popupNextRound(){
-        val builder = AlertDialog.Builder(this)
-
-        builder.setMessage("A vous")
-        builder.setCancelable(false)
-        builder.show()
-
-        val dlg = builder.create()
-
-        dlg.show()
-
-        val t = Timer()
-        t.schedule(object : TimerTask() {
-            override fun run() {
-                dlg.dismiss() // when the task active then close the dialog
-                t.cancel() // also just top the timer thread, otherwise, you may receive a crash report
-            }
-        }, 2000) // after 2 second (or 2000 miliseconds), the task will be active.
-
-
-    }
-*/
 
 
     private fun saveDataPlayer(playerDataName: EditText, playerDataScore: TextView) {
@@ -258,24 +235,7 @@ class MainActivity : AppCompatActivity() {
 
         AppDatabase.get(application).playerDao().insertPlayer(Player(nomJoueur, scoreP, this.difficulty))
         Log.d("test123", "$nomJoueur a bien ete ajoute avec un score de $scoreP")
-
-        //val intent = Intent(this, ActivityStart::class.java)
-        //startActivity(intent)
     }
 
-    /*
-    private fun saveDataPlayer(popupView: View) {
-        val scoreP = (tv_val_score.text.toString()).toLong()
-        val nomJoueur = popupView.findViewById<EditText>(R.id.name_player).text.toString()
-
-        Log.d("test123", nomJoueur)
-
-        AppDatabase.get(application).playerDao().insertPlayer(Player(nomJoueur, scoreP))
-        Log.d("test123", "$nomJoueur a bien ete ajoute avec un score de $scoreP")
-
-        val intent = Intent(this, ActivityStart::class.java)
-        startActivity(intent)
-    }
-*/
 
 }
