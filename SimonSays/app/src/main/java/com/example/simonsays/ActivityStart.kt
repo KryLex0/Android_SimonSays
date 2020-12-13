@@ -28,7 +28,15 @@ class ActivityStart : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_start)
 
+        val lastScore = AppDatabase.get(application).playerDao().getLastScore()
+        if(lastScore != null){
+            last_score.text = lastScore.score.toString()
+        }
 
+        val highScore = AppDatabase.get(application).playerDao().getHighScore()
+        if(highest_score != null){
+            highest_score.text =  highScore.score.toString()
+        }
 
         btn_start.setOnClickListener{
             val intent = Intent(this, MainActivity::class.java)

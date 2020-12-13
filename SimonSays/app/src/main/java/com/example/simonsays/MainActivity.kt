@@ -11,13 +11,16 @@ import android.view.View
 import android.view.animation.AlphaAnimation
 import android.view.animation.Animation
 import android.view.animation.LinearInterpolator
-import android.widget.*
+import android.widget.Button
+import android.widget.EditText
+import android.widget.TextView
+import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
-
 import kotlinx.android.synthetic.main.activity_main_test.*
 import kotlinx.android.synthetic.main.data_party.*
+import java.util.*
 
 
 class MainActivity : AppCompatActivity() {
@@ -129,7 +132,6 @@ class MainActivity : AppCompatActivity() {
         for(i in 1..nbBtnOpt) {
             this.listeBtnNextColor[i-1].visibility = View.VISIBLE
         }
-
     }
 
 
@@ -147,8 +149,16 @@ class MainActivity : AppCompatActivity() {
             temp = (0..i).random()
             listColorParty.add(tab[temp])
 
+            //animation des boutons de l'entete pour permettre a l'utilisateur de comprendre que ce sont de nouvelles couleurs
+            val anim: Animation = AlphaAnimation(1.0f, 0.2f)
+            anim.duration = 100
+            anim.startOffset = 200
+            anim.interpolator = LinearInterpolator()
+            anim.repeatMode = Animation.REVERSE
+            this.listeBtnNextColor[j-1].startAnimation(anim)
+
             //change la couleur des boutons dans l'en tete pour connaitre les prochaines couleurs
-            this.listeBtnNextColor[j-1].text = tabColorName[temp]
+            //this.listeBtnNextColor[j-1].text = tabColorName[temp]
             this.listeBtnNextColor[j-1].setBackgroundColor(Color.parseColor(tabColorHex[temp]))
         }
 
@@ -209,24 +219,33 @@ class MainActivity : AppCompatActivity() {
         builder.setPositiveButton("Ok") { _, _ ->
             saveDataPlayer(editTextNamePlayer, tv_val_score)    //ajout a la bdd avec le score et le nom saisie dans l'edit text
             finish()
+            val intent = Intent(this, ActivityStart::class.java)
+            startActivity(intent)
         }
         builder.show()
     }
 
 /*
-    private fun popupNamePlayer(){
-        val inflater = getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
-        val popupView: View = inflater.inflate(R.layout.popup_name, null)
+    private fun popupNextRound(){
+        val builder = AlertDialog.Builder(this)
 
-        val width = LinearLayout.LayoutParams.WRAP_CONTENT
-        val height = LinearLayout.LayoutParams.WRAP_CONTENT
+        builder.setMessage("A vous")
+        builder.setCancelable(false)
+        builder.show()
 
-        val popupWindow = PopupWindow(popupView, width, height, true)
-        popupWindow.showAtLocation(popupView, Gravity.CENTER, 0, 0)
+        val dlg = builder.create()
 
-        popupView.findViewById<Button>(R.id.but1).setOnClickListener {
-            saveDataPlayer(popupView)
-        }
+        dlg.show()
+
+        val t = Timer()
+        t.schedule(object : TimerTask() {
+            override fun run() {
+                dlg.dismiss() // when the task active then close the dialog
+                t.cancel() // also just top the timer thread, otherwise, you may receive a crash report
+            }
+        }, 2000) // after 2 second (or 2000 miliseconds), the task will be active.
+
+
     }
 */
 
@@ -240,8 +259,8 @@ class MainActivity : AppCompatActivity() {
         AppDatabase.get(application).playerDao().insertPlayer(Player(nomJoueur, scoreP, this.difficulty))
         Log.d("test123", "$nomJoueur a bien ete ajoute avec un score de $scoreP")
 
-        val intent = Intent(this, ActivityStart::class.java)
-        startActivity(intent)
+        //val intent = Intent(this, ActivityStart::class.java)
+        //startActivity(intent)
     }
 
     /*

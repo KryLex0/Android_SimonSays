@@ -15,6 +15,12 @@ interface PlayerDao {
     @Query("SELECT * FROM Players")
     fun getAll(): List<Player>
 
+    @Query("SELECT * FROM Players WHERE id=(SELECT max(id) FROM Players)")
+    fun getLastScore(): Player
+
+    @Query("SELECT * FROM Players WHERE score=(SELECT max(score) FROM Players)")
+    fun getHighScore(): Player
+
 
 
     @Query("SELECT * FROM Players ORDER BY score DESC, name ASC LIMIT 10")
