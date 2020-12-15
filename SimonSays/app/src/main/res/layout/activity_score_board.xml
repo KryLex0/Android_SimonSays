@@ -33,7 +33,9 @@
             android:entries="@array/difficulty_highscore"
             android:prompt="@string/diff_score"
             android:id="@+id/spinner_difficulty_highscore"
-            android:layout_weight="1" />
+            android:layout_weight="1"
+            android:textAlignment="center"
+            />
     </LinearLayout>
 
 

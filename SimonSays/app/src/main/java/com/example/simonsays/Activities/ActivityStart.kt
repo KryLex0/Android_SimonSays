@@ -21,14 +21,20 @@ class ActivityStart : AppCompatActivity() {
         setContentView(R.layout.activity_start)
 
         val lastScore = AppDatabase.get(application).playerDao().getLastScore()
-        if(lastScore != null){
+
+        if(lastScore == null){
+            last_score.text = "0"
+        }else{
             last_score.text = lastScore.score.toString()
         }
 
         val highScore = AppDatabase.get(application).playerDao().getHighScore()
-        if(highest_score != null){
+        if(highScore == null){
+            highest_score.text =  "0"
+        }else{
             highest_score.text =  highScore.score.toString()
         }
+
 
         btn_start.setOnClickListener{
             val intent = Intent(this, MainActivity::class.java)
