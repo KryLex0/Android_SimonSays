@@ -1,7 +1,6 @@
-package com.example.simonsays
+package com.example.simonsays.Activities
 
 
-import android.database.Cursor
 import android.os.Bundle
 import android.view.View
 import android.widget.AdapterView
@@ -11,6 +10,9 @@ import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.setPadding
+import com.example.simonsays.Database.AppDatabase
+import com.example.simonsays.Database.Player
+import com.example.simonsays.R
 import kotlinx.android.synthetic.main.activity_score_board.*
 
 

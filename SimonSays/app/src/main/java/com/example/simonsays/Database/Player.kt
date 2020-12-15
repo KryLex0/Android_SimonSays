@@ -1,4 +1,4 @@
-package com.example.simonsays
+package com.example.simonsays.Database
 
 import android.app.Application
 import androidx.room.ColumnInfo

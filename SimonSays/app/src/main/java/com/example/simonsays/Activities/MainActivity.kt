@@ -1,4 +1,4 @@
-package com.example.simonsays
+package com.example.simonsays.Activities
 
 
 import android.annotation.SuppressLint
@@ -18,9 +18,11 @@ import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
-import kotlinx.android.synthetic.main.activity_main_test.*
+import com.example.simonsays.Database.AppDatabase
+import com.example.simonsays.Database.Player
+import com.example.simonsays.R
+import kotlinx.android.synthetic.main.activity_main_party.*
 import kotlinx.android.synthetic.main.data_party.*
-import java.util.*
 
 
 class MainActivity : AppCompatActivity() {
@@ -45,7 +47,7 @@ class MainActivity : AppCompatActivity() {
     @RequiresApi(Build.VERSION_CODES.M)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main_test)
+        setContentView(R.layout.activity_main_party)
 
         //recupere le nombre de btn de couleur a retenir chaque tour (1,2,3) | le niveau de difficulté (Facile, Nomal, Difficile) | utilisation d'animation ou non pour les boutons
         this.listeBtnNextColor.addAll(arrayOf(btn_color1, btn_color2, btn_color3))
@@ -55,7 +57,7 @@ class MainActivity : AppCompatActivity() {
         this.animBtn = this.intent.getBooleanExtra("animSwitch", this.animBtn)
 
 
-        btnDataParty()  //affiche 1/2/3 boutons suivant le nombre de boutons par tours (options)
+        btnDataParty()  //affiche 1/2/3 boutons dans l'en tête suivant le nombre de boutons par tours (options)
         setBtnDifficulte()  //affiche 2/4/6 boutons suivant la difficulté choisit (options)
         nextLevel() //lancement de la 1ere manche
 
@@ -105,11 +107,13 @@ class MainActivity : AppCompatActivity() {
 
         btn[index].startAnimation(anim)
 
-        anim.setAnimationListener(object : Animation.AnimationListener {    //evite de lancer plusieurs fois la meme animation d'un bouton en même temps
+        //evite de lancer plusieurs fois la meme animation d'un bouton en même temps
+        anim.setAnimationListener(object : Animation.AnimationListener {
             override fun onAnimationRepeat(animation: Animation?) {}
             override fun onAnimationStart(animation: Animation?) {}
 
-            override fun onAnimationEnd(animation: Animation?) {    //permet de bien attendre la fin de chaque animations pour commencer la suivante
+            //permet de bien attendre la fin de chaque animations pour commencer la suivante
+            override fun onAnimationEnd(animation: Animation?) {
                 val index1 = index + 1
                 if(index < btn.size - 1) {
                     animButton(btn, index1)
@@ -129,6 +133,9 @@ class MainActivity : AppCompatActivity() {
 
 
     private fun btnDataParty(){ //bouton permettant de connaitre les prochaines couleurs (1,2 ou 3 boutons par tour suivant le choix dans les paramètres)
+        this.listeBtnNextColor.forEach {
+            it.visibility = View.GONE
+        }
         for(i in 1..nbBtnOpt) {
             this.listeBtnNextColor[i-1].visibility = View.VISIBLE
         }
@@ -228,7 +235,13 @@ class MainActivity : AppCompatActivity() {
 
 
     private fun saveDataPlayer(playerDataName: EditText, playerDataScore: TextView) {
-        val nomJoueur = playerDataName.text.toString()
+        var nomJoueur: String
+        if(playerDataName.text.isEmpty()){
+            nomJoueur = "???"
+        }else{
+            nomJoueur = playerDataName.text.toString()
+        }
+
         val scoreP = (playerDataScore.text.toString()).toLong()
 
         Log.d("test123", nomJoueur)

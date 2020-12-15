@@ -1,4 +1,4 @@
-package com.example.simonsays
+package com.example.simonsays.Activities
 
 
 import android.app.Activity
@@ -11,9 +11,9 @@ import android.widget.AdapterView
 import android.widget.AdapterView.OnItemSelectedListener
 import android.widget.SeekBar
 import android.widget.Spinner
-import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
+import com.example.simonsays.R
 import kotlinx.android.synthetic.main.activity_options.*
 
 
@@ -53,13 +53,8 @@ class ActivityOptions : AppCompatActivity() {
                 intent.putExtra("nb_btn_opt", progress)
             }
 
-            override fun onStartTrackingTouch(seek: SeekBar) {
-
-            }
-
-            override fun onStopTrackingTouch(seek: SeekBar) {
-
-            }
+            override fun onStartTrackingTouch(seek: SeekBar) {}
+            override fun onStopTrackingTouch(seek: SeekBar) {}
         })
 
 
@@ -91,42 +86,6 @@ class ActivityOptions : AppCompatActivity() {
     }
 
 
-/*
-    override fun onBackPressed(item: Any!) {               //back fleche android
-        //super.onBackPressed();
-        val intent = Intent(this, ActivityStart::class.java)
-        intent.putExtra("difficulty", item.toString())
-        setResult(Activity.RESULT_OK, intent)
-
-        finish()
-    }
-*/
-/*
-        btn_start.setOnClickListener{
-            val intent = Intent(this, MainActivity::class.java)
-            startActivity(intent)
-        }
-        btn_high_score.setOnClickListener{
-            val intent = Intent(this, ScoreBoard::class.java)
-            startActivity(intent)
-        }
-
-
-
-    }
-
-    @Override
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        if (requestCode == 222 && resultCode == Activity.RESULT_OK) {
-            val difficulte = data!!.getIntExtra("taille", paintView.getStrokeWidth())
-            paintView.setStrokeWidth(xSize)
-            val xColor = data.getIntExtra("couleur", paintView.getColor())
-            paintView.setColor(xColor)
-        }
-
-        super.onActivityResult(requestCode, resultCode, data)
-    }
-*/
 
 
 }

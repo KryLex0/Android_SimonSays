@@ -1,22 +1,14 @@
-package com.example.simonsays
+package com.example.simonsays.Activities
 
 
 import android.app.Activity
-import android.app.Application
 import android.content.Intent
-import android.graphics.drawable.BitmapDrawable
-import android.os.AsyncTask
 import android.os.Bundle
-import android.provider.MediaStore
-import android.util.Log
-import android.widget.Button
-import android.widget.TableLayout
-import android.widget.TableRow
-import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
-import kotlinx.android.synthetic.main.activity_options.*
+import com.example.simonsays.Database.AppDatabase
+import com.example.simonsays.R
+import com.example.simonsays.Activities.ScoreBoard
 import kotlinx.android.synthetic.main.activity_start.*
-import java.io.IOException
 
 
 class ActivityStart : AppCompatActivity() {
