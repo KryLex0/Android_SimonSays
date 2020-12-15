@@ -76,10 +76,6 @@ class MainActivity : AppCompatActivity() {
             this.tab.addAll(listOf(btn_1_T, btn_2_T, btn_3_T, btn_4_T, btn_5_T, btn_6_T))
         }
 
-        tab.forEach {
-            it.visibility = View.GONE
-        }
-
         tab.forEach {   //permet l'ajout d'un listener pour chaque boutons
             it.visibility = View.VISIBLE
             val btn = it.id
