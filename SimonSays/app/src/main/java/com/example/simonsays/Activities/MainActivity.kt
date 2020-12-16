@@ -67,12 +67,18 @@ class MainActivity : AppCompatActivity() {
 
     private fun setBtnDifficulte() {    //fonction qui affiche 2/4/6 boutons en fonction de la difficulté (dans les parametres)
         if(this.difficulty == "Facile"){
+            table_row_1.visibility = View.VISIBLE
             this.tab.addAll(listOf(btn_1_T, btn_2_T))
         }
         else if(this.difficulty == "Normal"){
+            table_row_1.visibility = View.VISIBLE
+            table_row_2.visibility = View.VISIBLE
             this.tab.addAll(listOf(btn_1_T, btn_2_T, btn_3_T, btn_4_T))
         }
         else if(this.difficulty == "Difficile"){
+            table_row_1.visibility = View.VISIBLE
+            table_row_2.visibility = View.VISIBLE
+            table_row_3.visibility = View.VISIBLE
             this.tab.addAll(listOf(btn_1_T, btn_2_T, btn_3_T, btn_4_T, btn_5_T, btn_6_T))
         }
 
